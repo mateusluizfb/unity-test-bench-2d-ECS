@@ -1,3 +1,5 @@
+using UnityEngine;
+
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -39,10 +41,12 @@ partial struct PlayerMovementSystem : ISystem
             if (keyboard.spaceKey.isPressed)
             {
                 transform.ValueRW.Position += forward * movement.ValueRO.Speed * boostData.ValueRW.BoostMultiplier * vertical * deltaTime;
+                boostData.ValueRW.IsBoostActive = true;
             }
             else
             {
                 transform.ValueRW.Position += forward * movement.ValueRO.Speed * vertical * deltaTime;
+                boostData.ValueRW.IsBoostActive = false;
             }
         }
     }
