@@ -14,28 +14,21 @@ partial struct BoostParticleToggleSystem : ISystem
         {
             var particleEntity = boostData.ValueRO.BoostParticlePrefab;
             float targetIntensity = boostData.ValueRO.IsBoostActive ? 1f : 0f;
-            
-            // Ensure the particle entity has ParticleIntensity component
-            if (!state.EntityManager.HasComponent<ParticleIntensity>(particleEntity))
+
+            UnityEngine.Debug.Log($"Setting target intensity to {targetIntensity} for entity {particleEntity}");
+
+            ecb.SetComponent(particleEntity, new ParticleIntensityData
             {
-                ecb.AddComponent(particleEntity, new ParticleIntensity { Value = 0f, TargetValue = targetIntensity });
-            }
-            else
-            {
-                // Update target intensity
-                ecb.SetComponent(particleEntity, new ParticleIntensity 
-                { 
-                    Value = state.EntityManager.GetComponentData<ParticleIntensity>(particleEntity).Value,
-                    TargetValue = targetIntensity 
-                });
-            }
+              Value = state.EntityManager.GetComponentData<ParticleIntensityData>(particleEntity).Value,
+              TargetValue = targetIntensity
+            });
         }
         
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
         
         // Smoothly interpolate and apply intensity to particle systems
-        foreach (var (intensity, entity) in SystemAPI.Query<RefRW<ParticleIntensity>>().WithEntityAccess())
+        foreach (var (intensity, entity) in SystemAPI.Query<RefRW<ParticleIntensityData>>().WithEntityAccess())
         {
             // Smoothly interpolate current value towards target
             intensity.ValueRW.Value = Unity.Mathematics.math.lerp(
