@@ -6,7 +6,7 @@ partial struct CameraZoomInOutSystem : ISystem
 {
     private float currentZoom;
     private float targetZoom;
-    private const float DefaultZoom = 5f; // Original camera size
+    private const float DefaultZoom = 7.0f;
     private const float MapZoom = 200f; // Half of 300 to cover full map
     private const float ZoomSpeed = 10f; // Speed of zoom transition
     
