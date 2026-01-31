@@ -21,8 +21,6 @@ partial struct AsteroidSpawnSystem : ISystem
                     return;
                 }
 
-                UnityEngine.Debug.Log("Spawning asteroid at time: " + currentTime);
-
                 // Spawn a new asteroid
                 var newAsteroid = state.EntityManager.Instantiate(spawnerData.ValueRO.AsteroidPrefab);
 

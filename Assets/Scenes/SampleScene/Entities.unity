@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovableComponent
   Speed: 5
+  RotationSpeed: 3
 --- !u!4 &269835728
 Transform:
   m_ObjectHideFlags: 0

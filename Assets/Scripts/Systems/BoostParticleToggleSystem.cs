@@ -15,8 +15,6 @@ partial struct BoostParticleToggleSystem : ISystem
             var particleEntity = boostData.ValueRO.BoostParticlePrefab;
             float targetIntensity = boostData.ValueRO.IsBoostActive ? 1f : 0f;
 
-            UnityEngine.Debug.Log($"Setting target intensity to {targetIntensity} for entity {particleEntity}");
-
             ecb.SetComponent(particleEntity, new ParticleIntensityData
             {
               Value = state.EntityManager.GetComponentData<ParticleIntensityData>(particleEntity).Value,

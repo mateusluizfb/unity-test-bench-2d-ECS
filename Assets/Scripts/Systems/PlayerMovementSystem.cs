@@ -19,9 +19,9 @@ partial struct PlayerMovementSystem : ISystem
         float vertical = 0f;
 
         if (keyboard.leftArrowKey.isPressed)
-            rotationZ = 10f;
+            rotationZ = 1f;
         else if (keyboard.rightArrowKey.isPressed)
-            rotationZ = -10f;
+            rotationZ = -1f;
             
         if (keyboard.upArrowKey.isPressed)
             vertical = 1f;
@@ -33,7 +33,7 @@ partial struct PlayerMovementSystem : ISystem
         {
             transform.ValueRW.Rotation = math.mul(
                 transform.ValueRW.Rotation,
-                quaternion.EulerXYZ(new float3(0, 0, rotationZ * deltaTime))
+                quaternion.EulerXYZ(new float3(0, 0, rotationZ * movement.ValueRO.RotationSpeed * deltaTime))
             );
 
             float3 forward = math.mul(transform.ValueRW.Rotation, new float3(0, 1, 0));
